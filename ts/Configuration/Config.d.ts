@@ -1,4 +1,7 @@
 interface Configuration {
+    readonly acceptingId: string;
+    readonly excludingId: string;
+    readonly gameName: string;
 }
 
 declare module "config" {

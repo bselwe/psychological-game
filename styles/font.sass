@@ -1,0 +1,12 @@
+=font-variant($name, $weight: 400)
+    @font-face
+        src: url("../fonts/OpenSans-" + $name + ".ttf")
+        font:
+            family: OpenSans
+            weight: $weight
+
++font-variant(Light, 300)
++font-variant(Regular)
++font-variant(SemiBold, 600)
++font-variant(Bold, 700)
++font-variant(ExtraBold, 700)

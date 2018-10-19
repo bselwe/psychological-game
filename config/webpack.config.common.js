@@ -3,6 +3,7 @@ const paths = require("./paths");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerPlugin = require("fork-ts-checker-webpack-plugin");
+const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HappyPack = require("happypack");
 
 const deployDir = process.env.DEPLOY_DIR || path.resolve(__dirname, "..", "deploy");
@@ -42,7 +43,12 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js"],
+        plugins: [
+            new TsConfigPathsPlugin({
+                configFile: paths.tsConfig
+            })
+        ]
     },
 
     module: {

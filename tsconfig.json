@@ -18,6 +18,11 @@
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": false,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "$components/*": [ "ts/Components/*"],
+      "$pages/*": [ "ts/Pages/*" ],
+      "$utils/*": [ "ts/Utils/*" ]
+    }
   }
 }
