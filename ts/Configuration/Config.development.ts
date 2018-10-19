@@ -1,7 +1,7 @@
 const config: Configuration = {
     acceptingId: "accepting",
     excludingId: "excluding",
-    gameName: "Nazwa gry"
+    gameName: "Quiz"
 };
 
 export default config;

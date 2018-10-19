@@ -5,11 +5,13 @@ import config from "config";
 import styles from "./styles.sass";
 import { Start } from "./Start";
 import { FirstSurvey } from "./FirstSurvey";
+import { Tutorial } from "./Tutorial";
 
 enum GameStage {
     Start,
     FirstSurvey,
-    Tutorial
+    Tutorial,
+    InGame
 }
 
 enum GameScenario {
@@ -49,6 +51,8 @@ class Game extends React.Component<RouteComponentProps, GameState> {
                 return <Start onContinue={() => this.setState({ stage: GameStage.FirstSurvey })} />;
             case GameStage.FirstSurvey:
                 return <FirstSurvey onContinue={() => this.setState({ stage: GameStage.Tutorial })} />;
+            case GameStage.Tutorial:
+                return <Tutorial onContinue={() => this.setState({ stage: GameStage.InGame })} />;
         }
     }
 }
