@@ -9,13 +9,6 @@ interface TutorialProps {
 }
 
 export class Tutorial extends React.Component<TutorialProps> {
-    constructor(props: TutorialProps) {
-        super(props);
-
-        this.state = {
-        };
-    }
-
     render() {
         return <div className={styles["tutorial"]}>
             <div className={styles["name"]}>{config.gameName}</div>

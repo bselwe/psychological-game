@@ -4,13 +4,15 @@ import config from "config";
 
 import styles from "./styles.sass";
 import { Start } from "./Start";
-import { FirstSurvey } from "./FirstSurvey";
+import { INTESurvey } from "./INTESurvey";
 import { Tutorial } from "./Tutorial";
+import { WaitingForPlayers } from "./WaitingForPlayers";
 
 enum GameStage {
     Start,
-    FirstSurvey,
+    INTESurvey,
     Tutorial,
+    WaitingForPlayers,
     InGame
 }
 
@@ -48,11 +50,13 @@ class Game extends React.Component<RouteComponentProps, GameState> {
     private getPage = () => {
         switch (this.state.stage) {
             case GameStage.Start:
-                return <Start onContinue={() => this.setState({ stage: GameStage.FirstSurvey })} />;
-            case GameStage.FirstSurvey:
-                return <FirstSurvey onContinue={() => this.setState({ stage: GameStage.Tutorial })} />;
+                return <Start onContinue={() => this.setState({ stage: GameStage.INTESurvey })} />;
+            case GameStage.INTESurvey:
+                return <INTESurvey onContinue={() => this.setState({ stage: GameStage.Tutorial })} />;
             case GameStage.Tutorial:
-                return <Tutorial onContinue={() => this.setState({ stage: GameStage.InGame })} />;
+                return <Tutorial onContinue={() => this.setState({ stage: GameStage.WaitingForPlayers })} />;
+            case GameStage.WaitingForPlayers:
+                return <WaitingForPlayers onContinue={() => this.setState({ stage: GameStage.InGame })} />;
         }
     }
 }

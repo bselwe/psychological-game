@@ -4,19 +4,19 @@ import config from "config";
 import styles from "./styles.sass";
 import { AppButton } from "$components/AppButton";
 
-interface FirstSurveyProps {
+interface INTESurveyProps {
     readonly onContinue: () => void;
 }
 
-interface FirstSurveyState {
+interface INTESurveyState {
     readonly surveyLoads: number;
     readonly surveySubmitted: boolean;
 }
 
-export class FirstSurvey extends React.Component<FirstSurveyProps, FirstSurveyState> {
+export class INTESurvey extends React.Component<INTESurveyProps, INTESurveyState> {
     private survey: HTMLIFrameElement | null = null;
 
-    constructor(props: FirstSurveyProps) {
+    constructor(props: INTESurveyProps) {
         super(props);
 
         this.state = {
@@ -26,7 +26,7 @@ export class FirstSurvey extends React.Component<FirstSurveyProps, FirstSurveySt
     }
 
     render() {
-        return <div className={styles["firstSurvey"]}>
+        return <div className={styles["inteSurvey"]}>
             <div className={styles["name"]}>{config.gameName}</div>
             <div className={styles["desc"]}>Przed rozpoczęciem rozgrywki upewnij się, że <u>wypełniłeś/aś formularz.</u></div>
             <div className={styles["survey"]}>

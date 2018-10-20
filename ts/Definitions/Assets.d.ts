@@ -15,3 +15,9 @@ declare module "*.png" {
 
     export default name;
 }
+
+declare module "*.gif" {
+    const name: string;
+
+    export default name;
+}
