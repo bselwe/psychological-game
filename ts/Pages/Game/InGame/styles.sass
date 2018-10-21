@@ -1,0 +1,167 @@
+// $activeColor: #3e9fe4 // blue
+$activeColor: #5db2ef // light blue
+// $activeColor: #ffb060
+
+.inGame
+    width: 640px
+    height: 100vh
+    min-height: 820px
+    max-height: 860px
+    display: flex
+    overflow: hidden
+    justify-self: center
+    align-self: center
+    flex-direction: column
+
+    .nameAndOpponents, .feedbackAndYou
+        flex: 1
+        display: flex
+        min-width: -webkit-min-content; /* Workaround to Chrome bug */
+        flex-direction: column
+
+    .questionAndAnswers
+        display: flex
+        flex-direction: column
+
+        .gameEnd
+            text-align: center
+            font-size: 32px
+            font-weight: bold
+            color: $activeColor
+            margin-bottom: 24px
+
+        .continue
+            align-self: center
+
+    .feedbackAndYou
+        justify-content: flex-end
+
+    .feedback
+        text-align: center
+        font-size: 16px
+        margin-bottom: 40px
+        // color: #329db1
+        font-size: 16px
+
+        .responder, .playerChoose
+            margin-bottom: 8px
+            color: $activeColor
+
+        .timeRemaining
+            color: #9e9e9e
+
+    .you
+        align-self: center
+        justify-self: flex-end
+        margin-bottom: 48px
+
+        img
+            cursor: default !important
+
+    .name
+        font-size: 48px
+        margin-top: 32px
+        margin-bottom: 32px
+        text-align: center
+
+    .opponents
+        display: flex
+        flex: 1
+        flex-direction: row
+        justify-content: space-between
+        margin: 30px
+        margin-top: 0
+
+    .opponent, .you
+        width: 120px
+        justify-content: center
+        align-items: center
+        text-align: center
+        font-size: 16px
+        font-weight: bold
+        text-transform: uppercase
+
+        .playerPhoto
+            position: relative
+
+        .score
+            position: absolute
+            bottom: 5px
+            right: -8px
+            pointer-events: none
+            border-radius: 20px
+            padding: 2px 8px
+            background-color: white
+            font-size: 14px
+
+        &.selected .playerName
+            color: $activeColor
+
+        &.selected img
+            -webkit-box-shadow: 0px 0px 30px 8px $activeColor
+            -moz-box-shadow: 0px 0px 30px 8px $activeColor
+            box-shadow: 0px 0px 30px 8px $activeColor
+            opacity: 1.0
+
+        &.availableToChoose img
+            cursor: pointer
+            -webkit-box-shadow: 0px 0px 30px 8px #ffb060
+            -moz-box-shadow: 0px 0px 30px 8px #ffb060
+            box-shadow: 0px 0px 30px 8px #ffb060
+
+            -webkit-transition: opacity 0.5s ease-in-out
+            -moz-transition: opacity 0.5s ease-in-out
+            transition: opacity 0.5s ease-in-out
+
+            &:hover
+                opacity: 1.0 !important
+
+        .playerName
+            margin-bottom: 16px
+            color: #9e9e9e
+
+        img
+            // cursor: pointer
+            border-radius: 60px
+            background-color: white
+            opacity: 0.45
+
+    .question
+        text-align: center
+        font-size: 22px
+
+    .divider
+        margin-left: 12px
+        margin-right: 12px
+        height: 1px
+        margin-bottom: 32px
+        background-color: #9e9e9e
+        opacity: 0.4
+
+    .answers
+        margin-top: 24px
+        flex-direction: row
+        flex: 1
+        display: flex
+
+        .twoAnswers
+            flex: 1
+
+            > div
+                margin: 12px
+                cursor: pointer
+
+                &:hover
+                    color: grey
+
+                &.selected, &.accepted, &.rejected
+
+                &.selected
+                    color: lightgrey
+
+                &.accepted
+                    // color: #63b167
+                    color: #52d83d
+
+                &.rejected
+                    color: red

@@ -4,6 +4,12 @@ declare module "*.sass" {
     export default styles;
 }
 
+declare module "*.json" {
+    const json: any;
+
+    export default json;
+}
+
 declare module "*.svg" {
     const name: string;
 

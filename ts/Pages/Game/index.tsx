@@ -7,16 +7,18 @@ import { Start } from "./Start";
 import { INTESurvey } from "./INTESurvey";
 import { Tutorial } from "./Tutorial";
 import { WaitingForPlayers } from "./WaitingForPlayers";
+import { InGame } from "./InGame";
 
 enum GameStage {
     Start,
     INTESurvey,
     Tutorial,
     WaitingForPlayers,
-    InGame
+    InGame,
+    Rank
 }
 
-enum GameScenario {
+export enum GameScenario {
     Accepting,
     Excluding
 }
@@ -31,7 +33,7 @@ class Game extends React.Component<RouteComponentProps, GameState> {
         super(props);
 
         this.state = {
-            stage: GameStage.Start, // TODO: Change to start
+            stage: GameStage.InGame, // TODO: Change to start
             scenario: this.resolveGameScenario()
         };
     }
@@ -57,6 +59,8 @@ class Game extends React.Component<RouteComponentProps, GameState> {
                 return <Tutorial onContinue={() => this.setState({ stage: GameStage.WaitingForPlayers })} />;
             case GameStage.WaitingForPlayers:
                 return <WaitingForPlayers onContinue={() => this.setState({ stage: GameStage.InGame })} />;
+            case GameStage.InGame:
+                return <InGame scenario={this.state.scenario} onContinue={() => this.setState({ stage: GameStage.Rank })} />;
         }
     }
 }

@@ -22,7 +22,9 @@
     "paths": {
       "$components/*": [ "ts/Components/*"],
       "$pages/*": [ "ts/Pages/*" ],
-      "$utils/*": [ "ts/Utils/*" ]
+      "$utils/*": [ "ts/Utils/*" ],
+      "$images/*": [ "images/*" ],
+      "$algorithms/*": [ "algorithms/*" ]
     }
   }
 }
