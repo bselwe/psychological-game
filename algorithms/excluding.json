@@ -1,0 +1,206 @@
+[
+  {
+    "question": "Jaki jest wzór na pole trójkąta?",
+    "answers": [
+      "iloczyn podstawy i wysokości dzielony przez dwa",
+      "iloczyn podstawy i wysokości",
+      "iloraz podstawy i wysokości dzielony na trzy",
+      "suma boków"
+    ],
+    "acceptedAnswer": 0,
+    "opponentResponse": 0,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Jakie są kolory polskiej flagi?",
+    "answers": [
+      "niebiesko – czarna",
+      "żółto – zielona",
+      "biało – czerwona",
+      "biało – czerwono – niebieska"
+    ],
+    "acceptedAnswer": 2,
+    "opponentResponse": null,
+    "isPlayerResponder": true
+  },
+  {
+    "question": "Wzór sumaryczny soli kuchennej to:",
+    "answers": [
+      "H2O",
+      "C2H5OH",
+      "NaCl",
+      "NaCOOH"
+    ],
+    "acceptedAnswer": 2,
+    "opponentResponse": 2,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Ile żeber ma człowiek?",
+    "answers": [
+      "siedem par",
+      "dwanaście par",
+      "czternaście par",
+      "dwadzieścia cztery pary"
+    ],
+    "acceptedAnswer": 1,
+    "opponentResponse": 1,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Ile jest zasad dynamiki Newtona?",
+    "answers": [
+      "jedna",
+      "trzy",
+      "pięć",
+      "siedem"
+    ],
+    "acceptedAnswer": 1,
+    "opponentResponse": 2,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Jaka jest liczba ludności w Polsce?",
+    "answers": [
+      "około 5 milionów",
+      "około 20 milionów",
+      "około 40 milionów",
+      "około 60 milionów"
+    ],
+    "acceptedAnswer": 2,
+    "opponentResponse": 2,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "W którym roku wybuchła II wojna światowa?",
+    "answers": [
+      "1918",
+      "1939",
+      "1920",
+      "1944"
+    ],
+    "acceptedAnswer": 1,
+    "opponentResponse": 1,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Kto jest autorem powieści „Lot szerszeni”?",
+    "answers": [
+      "Alice Woodward",
+      "Stephen Baker",
+      "Marek Ochocki",
+      "Edith Bleu"
+    ],
+    "acceptedAnswer": -1,
+    "opponentResponse": null,
+    "isPlayerResponder": true
+  },
+  {
+    "question": "Jakie dzieła wchodzą w skład Trylogii Sienkiewicza?",
+    "answers": [
+      "Krzyżacy, Nad Niemnem, Pan Tadeusz",
+      "Krzyżacy, Potop, Ogniem i mieczem",
+      "Pan Wołodyjowski, Potop, Pan Tadeusz",
+      "Pan Wołodyjowski, Potop, Ogniem i mieczem"
+    ],
+    "acceptedAnswer": 3,
+    "opponentResponse": 3,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Kto wynalazł żarówkę?",
+    "answers": [
+      "Einstein",
+      "Edison",
+      "Ericsson",
+      "Otis"
+    ],
+    "acceptedAnswer": 1,
+    "opponentResponse": 0,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Kto namalował „Bitwę pod Grunwaldem”?",
+    "answers": [
+      "autor nieznany",
+      "Wojciech Horacy Kossak",
+      "Jan Matejko",
+      "Stanisław Wyspiański"
+    ],
+    "acceptedAnswer": 2,
+    "opponentResponse": 2,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Kto był pierwszym królem Polski?",
+    "answers": [
+      "Mieszko I",
+      "Kazimierz Wielki",
+      "Stanisław August Poniatowski",
+      "Bolesław Chrobry"
+    ],
+    "acceptedAnswer": 3,
+    "opponentResponse": 0,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Jak nazywa się najgłębszy rów oceaniczny?",
+    "answers": [
+      "Kurylsko – Kamczacki ",
+      "Mariański",
+      "Meksykański",
+      "Atlantycki"
+    ],
+    "acceptedAnswer": 1,
+    "opponentResponse": 1,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Serotonina to:",
+    "answers": [
+      "składnik krwi",
+      "hormon szczęścia",
+      "hormon strachu",
+      "element układu pokarmowego"
+    ],
+    "acceptedAnswer": 1,
+    "opponentResponse": 1,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Wielka Niedźwiedzica to inaczej:",
+    "answers": [
+      "Droga Mleczna",
+      "Gwiazda Polarna",
+      "Wielki Wóz",
+      "Mały Wóz"
+    ],
+    "acceptedAnswer": 2,
+    "opponentResponse": 2,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Co oznacza po łacinie „Panta rhei”?",
+    "answers": [
+      "„woda płynie”",
+      "„życie ucieka”",
+      "„ryba w wodzie”",
+      "„wszystko płynie”"
+    ],
+    "acceptedAnswer": 3,
+    "opponentResponse": 3,
+    "isPlayerResponder": false
+  },
+  {
+    "question": "Kto jest autorem słów: „Kończ waść, wstydu oszczędź”?",
+    "answers": [
+      "Pan Tadeusz",
+      "Janosik",
+      "Kmicic",
+      "Jacek Soplica"
+    ],
+    "acceptedAnswer": 2,
+    "opponentResponse": 0,
+    "isPlayerResponder": false
+  }
+]

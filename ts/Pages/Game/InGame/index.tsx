@@ -4,6 +4,7 @@ import config from "config";
 import { joinCls } from "$utils/JoinClasses";
 import { getTimeBetweenMs } from "$utils/Time";
 import acceptingAlgorithm from "$algorithms/accepting.json";
+import excludingAlgorithm from "$algorithms/excluding.json";
 
 import styles from "./styles.sass";
 import opponentOne from "$images/opponent-one.svg";
@@ -55,14 +56,18 @@ export class InGame extends React.Component<InGameProps, InGameState> {
     constructor(props: InGameProps) {
         super(props);
 
+        const algorithm: AlgorithmStep[] = props.scenario === GameScenario.Accepting ? acceptingAlgorithm : excludingAlgorithm;
+        const currentStep = 0;
+        const step = algorithm[currentStep];
+
         this.state = {
-            selectedPlayer: Player.First,
+            selectedPlayer: step.isPlayerResponder ? Player.Second : Player.First,
             selectedAnswer: null,
             acceptedAnswer: null,
             scores: { "First": 0, "Second": 0, "Third": 0 },
-            lastOpponent: Player.First,
-            algorithm: props.scenario === GameScenario.Accepting ? acceptingAlgorithm : acceptingAlgorithm, // TODO: Change
-            currentStep: 0,
+            lastOpponent: step.isPlayerResponder ? Player.Second : Player.First,
+            algorithm,
+            currentStep,
             secondsPassed: 0,
             secondsLeft: config.maxAnswerTimeSeconds,
             isChoosingOpponent: false,
