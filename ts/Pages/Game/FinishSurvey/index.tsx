@@ -4,17 +4,17 @@ import config from "config";
 import styles from "./styles.sass";
 import { AppButton } from "$components/AppButton";
 
-interface INTESurveyProps {
+interface FinishSurveyProps {
     readonly onContinue: () => void;
 }
 
-interface INTESurveyState {
+interface FinishSurveyState {
     readonly surveyLoads: number;
     readonly surveySubmitted: boolean;
 }
 
-export class INTESurvey extends React.Component<INTESurveyProps, INTESurveyState> {
-    constructor(props: INTESurveyProps) {
+export class FinishSurvey extends React.Component<FinishSurveyProps, FinishSurveyState> {
+    constructor(props: FinishSurveyProps) {
         super(props);
 
         this.state = {
@@ -24,13 +24,12 @@ export class INTESurvey extends React.Component<INTESurveyProps, INTESurveyState
     }
 
     render() {
-        return <div className={styles["inteSurvey"]}>
+        return <div className={styles["finishSurvey"]}>
             <div className={styles["name"]}>{config.gameName}</div>
-            <div className={styles["desc"]}>Przed rozpoczęciem rozgrywki upewnij się, że <u>wypełniłeś/aś formularz</u>.</div>
             <div className={styles["survey"]}>
                 <iframe
                     id={"google-survey"}
-                    onLoad={this.onSurveyLoad} src="https://docs.google.com/forms/d/e/1FAIpQLSfTpgi6FoATvYXIBEFscj4WTxblfQRpZOb8JEpTENnPrJaJiA/viewform?embedded=true"
+                    onLoad={this.onSurveyLoad} src="https://docs.google.com/forms/d/e/1FAIpQLSdKMh5SbgRTTDrIGR_ZBMknFZSDle7PmmVLeZRY8tsJdtzOHg/viewform?embedded=true&fbclid=IwAR1VE52oBY160OgnXkn4HllcRUZpSVtVw1lZyxqZnLj4GcjRkFaRJKZfUyI"
                     width="640"
                     height="500"
                     frameBorder="0"
@@ -41,8 +40,8 @@ export class INTESurvey extends React.Component<INTESurveyProps, INTESurveyState
             </div>
             <div className={styles["continue"]}>
                 <AppButton
-                    title={"Rozpocznij rozgrywkę"}
-                    // disabled={!this.state.surveySubmitted}
+                    title={"Przejdź dalej"}
+                    disabled={!this.state.surveySubmitted}
                     onClick={this.continue} />
             </div>
         </div>;
@@ -51,7 +50,7 @@ export class INTESurvey extends React.Component<INTESurveyProps, INTESurveyState
     private onSurveyLoad = (e: React.SyntheticEvent<HTMLIFrameElement>) => {
         this.setState({
             surveyLoads: this.state.surveyLoads + 1,
-            surveySubmitted: this.state.surveyLoads >= 4
+            surveySubmitted: this.state.surveyLoads >= 1
         });
     }
 

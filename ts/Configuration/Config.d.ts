@@ -5,6 +5,9 @@ interface Configuration {
     readonly isDebug: boolean;
     readonly minWaitingForPlayersTimeSeconds: number;
     readonly maxWaitingForPlayersTimeSeconds: number;
+    readonly numberOfQuestionsInFirstRound: number;
+    readonly timeBeforeStartingGameSeconds: number;
+    readonly playerAutomaticChoosingTimeSeconds: number;
     readonly maxAnswerTimeSeconds: number;
     readonly maxPlayerChooseTimeSeconds: number;
     readonly minOpponentAnswerTimeSeconds: number;

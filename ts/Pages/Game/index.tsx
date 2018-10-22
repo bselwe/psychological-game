@@ -7,7 +7,10 @@ import { Start } from "./Start";
 import { INTESurvey } from "./INTESurvey";
 import { Tutorial } from "./Tutorial";
 import { WaitingForPlayers } from "./WaitingForPlayers";
-import { InGame } from "./InGame";
+import { InGame, PlayerScores } from "./InGame";
+import { Rank } from "./Rank";
+import { FinishSurvey } from "./FinishSurvey";
+import { Explanation } from "./Explanation";
 
 enum GameStage {
     Start,
@@ -15,7 +18,9 @@ enum GameStage {
     Tutorial,
     WaitingForPlayers,
     InGame,
-    Rank
+    Rank,
+    FinishSurvey,
+    Explanation
 }
 
 export enum GameScenario {
@@ -26,6 +31,7 @@ export enum GameScenario {
 interface GameState {
     readonly stage: GameStage;
     readonly scenario: GameScenario;
+    readonly scores?: PlayerScores;
 }
 
 class Game extends React.Component<RouteComponentProps, GameState> {
@@ -33,7 +39,7 @@ class Game extends React.Component<RouteComponentProps, GameState> {
         super(props);
 
         this.state = {
-            stage: GameStage.InGame, // TODO: Change to start
+            stage: GameStage.Start,
             scenario: this.resolveGameScenario()
         };
     }
@@ -60,7 +66,13 @@ class Game extends React.Component<RouteComponentProps, GameState> {
             case GameStage.WaitingForPlayers:
                 return <WaitingForPlayers onContinue={() => this.setState({ stage: GameStage.InGame })} />;
             case GameStage.InGame:
-                return <InGame scenario={this.state.scenario} onContinue={() => this.setState({ stage: GameStage.Rank })} />;
+                return <InGame scenario={this.state.scenario} onContinue={scores => this.setState({ stage: GameStage.Rank, scores })} />;
+            case GameStage.Rank:
+                return <Rank scores={this.state.scores as PlayerScores} onContinue={() => this.setState({ stage: GameStage.FinishSurvey })} />;
+            case GameStage.FinishSurvey:
+                return <FinishSurvey onContinue={() => this.setState({ stage: GameStage.Explanation })} />;
+            case GameStage.Explanation:
+                return <Explanation />;
         }
     }
 }

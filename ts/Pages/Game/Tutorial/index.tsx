@@ -14,7 +14,10 @@ export class Tutorial extends React.Component<TutorialProps> {
             <div className={styles["name"]}>{config.gameName}</div>
             <div className={styles["rulesTitle"]}>Zasady gry</div>
             <div className={styles["rulesDesc"]}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut mi nec dolor tristique pellentesque. Quisque sed vehicula enim, sit amet scelerisque odio. Donec auctor nunc vel aliquam luctus. Nunc tincidunt mollis lectus, vitae bibendum leo. Phasellus commodo at odio sed feugiat. Nulla sit amet ipsum at dolor egestas imperdiet. Etiam rhoncus turpis ut viverra pellentesque. Nullam eget lacinia augue. Donec cursus malesuada faucibus. Nullam aliquet auctor elit, at dapibus urna pharetra ut. Curabitur tempus sodales luctus. Vestibulum eget ex in quam molestie dignissim in eget mi.
+                <p>Za chwilę rozpocznie się gra, w której razem z dwójką innych osób połączonych online będziecie tworzyć zespół.</p>
+                <p>Waszym zadaniem jest udzielenie jak największej liczby poprawnych odpowiedzi. Rozgrywka jest podzielona na etapy, zatem od tej rundy zależy Wasz dalszy udział w grze.</p>
+                <p>W rundzie pierwszej każdy z graczy kolejno udziela odpowiedzi. W dalszej części gry uczestnicy po udzieleniu prawidłowej odpowiedzi wyznaczają osobę do następnego pytania.</p>
+                <p>W przypadku udzielenia błędnej odpowiedzi, nowe pytanie przechodzi do osoby, która odpowiadała jako ostatnia.</p>
             </div>
             <div className={styles["continue"]}>
                 <AppButton

@@ -13,11 +13,13 @@ import you from "$images/you.svg";
 import { GameScenario } from "$pages/Game";
 import { AppButton } from "$components/AppButton";
 
-enum Player {
+export enum Player {
     First = 1,
     Second = 2, // You
     Third = 3
 }
+
+export type PlayerScores = { -readonly [P in keyof typeof Player]: number; };
 
 type OnNewPlayerCallback = (newPlayer: Player) => void;
 
@@ -31,21 +33,23 @@ interface AlgorithmStep {
 
 interface InGameProps {
     readonly scenario: GameScenario;
-    readonly onContinue: () => void;
+    readonly onContinue: (scores: PlayerScores) => void;
 }
 
 interface InGameState {
     readonly selectedPlayer: Player;
     readonly selectedAnswer: number | null;
     readonly acceptedAnswer: number | null;
-    readonly scores: { -readonly [P in keyof typeof Player]: number; };
+    readonly scores: PlayerScores;
     readonly lastOpponent: Player;
     readonly algorithm: AlgorithmStep[];
     readonly currentStep: number;
-    readonly secondsPassed: number;
     readonly secondsLeft: number;
     readonly isChoosingOpponent: boolean;
+    readonly firstRoundRoundsRemaining: number;
     readonly lastQuestionAnsweredCorrectly: boolean;
+    readonly automaticPlayerChoosing: boolean;
+    readonly gameStarted: boolean;
     readonly gameEnd: boolean;
 }
 
@@ -68,16 +72,18 @@ export class InGame extends React.Component<InGameProps, InGameState> {
             lastOpponent: step.isPlayerResponder ? Player.Second : Player.First,
             algorithm,
             currentStep,
-            secondsPassed: 0,
-            secondsLeft: config.maxAnswerTimeSeconds,
+            secondsLeft: config.timeBeforeStartingGameSeconds,
             isChoosingOpponent: false,
+            firstRoundRoundsRemaining: config.numberOfQuestionsInFirstRound,
             lastQuestionAnsweredCorrectly: false,
+            automaticPlayerChoosing: false,
+            gameStarted: false,
             gameEnd: false
         };
     }
 
     componentDidMount() {
-        this.beginQuestion();
+        this.beginGame();
     }
 
     render() {
@@ -90,7 +96,7 @@ export class InGame extends React.Component<InGameProps, InGameState> {
                 <div className={styles["opponents"]}>
                     <div className={joinCls(
                         styles["opponent"],
-                        this.state.selectedPlayer === Player.First && styles["selected"],
+                        this.state.gameStarted && this.state.selectedPlayer === Player.First && styles["selected"],
                         isPlayerChoosingOpponent && styles["availableToChoose"])}>
                         <div className={styles["playerName"]}>Gracz 1</div>
                         <div className={styles["playerPhoto"]}>
@@ -102,7 +108,7 @@ export class InGame extends React.Component<InGameProps, InGameState> {
                     </div>
                     <div className={joinCls(
                         styles["opponent"],
-                        this.state.selectedPlayer === Player.Third && styles["selected"],
+                        this.state.gameStarted && this.state.selectedPlayer === Player.Third && styles["selected"],
                         isPlayerChoosingOpponent && styles["availableToChoose"])}>
                         <div className={styles["playerName"]}>Gracz 3</div>
                         <div className={styles["playerPhoto"]}>
@@ -115,7 +121,7 @@ export class InGame extends React.Component<InGameProps, InGameState> {
                 </div>
             </div>
             <div className={styles["questionAndAnswers"]}>
-                {!this.state.gameEnd ?
+                {!this.state.gameEnd ? this.state.gameStarted ?
                 <>
                     <div className={styles["question"]}>
                         {step.question}
@@ -130,16 +136,20 @@ export class InGame extends React.Component<InGameProps, InGameState> {
                             {this.renderAnswer(3)}
                         </div>
                     </div>
-                </> :
+                </>
+                :
+                <div className={styles["gameStarting"]}>Gra rozpocznie się za <br/>{this.state.secondsLeft} s</div>
+                :
                 <>
                     <div className={styles["gameEnd"]}>Koniec gry</div>
                     <AppButton
                         title={"Przejdź dalej"}
                         className={styles["continue"]}
-                        onClick={this.props.onContinue} />
+                        onClick={() => this.props.onContinue(this.state.scores)} />
                 </>}
             </div>
             <div className={styles["feedbackAndYou"]}>
+                {this.state.gameStarted &&
                 <div className={styles["feedback"]}>
                     {!this.state.gameEnd &&
                     <>
@@ -150,13 +160,15 @@ export class InGame extends React.Component<InGameProps, InGameState> {
                             <span>Gracz {this.state.selectedPlayer} wybiera kolejnego gracza.</span>}
                         </div> :
                         <div className={styles["responder"]}>
-                            {this.isPlayerPlaying() ?
-                            <span><b>Odpowiadasz!</b></span> :
-                            <span>Odpowiada Gracz {this.state.selectedPlayer}.</span>}
+                            {this.state.automaticPlayerChoosing ?
+                                <span>Losowanie kolejnego gracza...</span> :
+                                this.isPlayerPlaying() ?
+                                    <span><b>Odpowiadasz!</b></span> :
+                                    <span>Odpowiada Gracz {this.state.selectedPlayer}.</span>}
                         </div>}
                         <div className={styles["timeRemaining"]}>Pozostały czas: <b>{this.state.secondsLeft} s</b></div>
                     </>}
-                </div>
+                </div>}
                 <div className={joinCls(styles["you"], this.isPlayerPlaying() && styles["selected"])}>
                     <div className={styles["playerName"]}>Gracz 2 (Ty)</div>
                     <div className={styles["playerPhoto"]}>
@@ -175,7 +187,7 @@ export class InGame extends React.Component<InGameProps, InGameState> {
         const selectedAnswer = this.state.selectedAnswer;
 
         return <div
-            onClick={() => isPlayerResponder && !this.state.selectedAnswer && this.selectAnswer(answer)}
+            onClick={() => isPlayerResponder && !this.state.selectedAnswer && !this.state.automaticPlayerChoosing && this.selectAnswer(answer)}
             className={joinCls(
                 selectedAnswer === answer && acceptedAnswer === null && styles["selected"],
                 acceptedAnswer === answer && selectedAnswer === answer && styles["accepted"],
@@ -185,7 +197,16 @@ export class InGame extends React.Component<InGameProps, InGameState> {
         </div>;
     }
 
-    private beginQuestion = () => {
+    private beginGame = () => {
+        this.initializeTimer(() => {
+            this.setState({
+                gameStarted: true,
+                secondsLeft: config.maxAnswerTimeSeconds
+            }, this.beginQuestions);
+        });
+    }
+
+    private beginQuestions = () => {
         this.initializeTimer(() => {
             this.setState({
                 lastQuestionAnsweredCorrectly: false
@@ -219,10 +240,10 @@ export class InGame extends React.Component<InGameProps, InGameState> {
                     acceptedAnswer: null,
                     lastOpponent,
                     currentStep,
-                    secondsPassed: 0,
                     secondsLeft: config.maxAnswerTimeSeconds,
-                    isChoosingOpponent: false
-                }, this.beginQuestion);
+                    isChoosingOpponent: false,
+                    firstRoundRoundsRemaining: this.state.firstRoundRoundsRemaining - 1
+                }, this.beginQuestions);
             });
         }
     }
@@ -230,13 +251,25 @@ export class InGame extends React.Component<InGameProps, InGameState> {
     private waitForNewPlayer = (defaultNextPlayer: Player, onSuccess: (selectedPlayer: Player) => void) => {
         this.onNewPlayerCallback = onSuccess;
 
-        if (!this.state.lastQuestionAnsweredCorrectly) {
+        if (this.state.firstRoundRoundsRemaining > 0) {
             this.onNewPlayerCallback(defaultNextPlayer);
             return;
         }
 
+        if (!this.state.lastQuestionAnsweredCorrectly) {
+            this.setState({
+                automaticPlayerChoosing: true
+            }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        automaticPlayerChoosing: false
+                    }, () => (this.onNewPlayerCallback as OnNewPlayerCallback)(defaultNextPlayer));
+                }, config.playerAutomaticChoosingTimeSeconds * 1000);
+            });
+            return;
+        }
+
         this.setState({
-            secondsPassed: 0,
             secondsLeft: config.maxPlayerChooseTimeSeconds,
             isChoosingOpponent: true
         }, () => {
@@ -320,10 +353,7 @@ export class InGame extends React.Component<InGameProps, InGameState> {
 
     private waitForResponse = (onSuccess: () => void) => {
         if (this.state.secondsLeft > 0) {
-            this.setState({
-                secondsLeft: this.state.secondsLeft - 1,
-                secondsPassed: this.state.secondsPassed + 1
-            });
+            this.setState({ secondsLeft: this.state.secondsLeft - 1 });
             this.timer = setTimeout(() => this.waitForResponse(onSuccess), 1000);
         } else {
             onSuccess();
