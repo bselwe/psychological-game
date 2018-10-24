@@ -8,7 +8,7 @@ const config: Configuration = {
     numberOfQuestionsInFirstRound: 3,
     timeBeforeStartingGameSeconds: 5,
     playerAutomaticChoosingTimeSeconds: 3,
-    maxAnswerTimeSeconds: 60,
+    maxAnswerTimeSeconds: 30,
     maxPlayerChooseTimeSeconds: 20,
     minOpponentAnswerTimeSeconds: 5,
     maxOpponentAnswerTimeSeconds: 12,
