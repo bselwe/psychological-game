@@ -24,7 +24,11 @@ export class Start extends React.Component<StartProps, StartState> {
     render() {
         return <div className={styles["start"]}>
             <div className={styles["name"]}>{config.gameName}</div>
-            <div className={styles["desc"]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut mi nec dolor tristique pellentesque. Quisque sed vehicula enim, sit amet scelerisque odio. Donec auctor nunc vel aliquam luctus. Nunc tincidunt mollis lectus, vitae bibendum leo. Phasellus commodo at odio sed feugiat. Nulla sit amet ipsum at dolor egestas imperdiet. Etiam rhoncus turpis ut viverra pellentesque. Nullam eget lacinia augue. Donec cursus malesuada faucibus. Nullam aliquet auctor elit, at dapibus urna pharetra ut. Curabitur tempus sodales luctus. Vestibulum eget ex in quam molestie dignissim in eget mi.</div>
+            <div className={styles["desc"]}>
+                <p>Dziękujemy za zainteresowanie naszym badaniem. Jesteśmy studentami V roku psychologii. W ramach badań do pracy magisterskiej przeprowadzamy badanie dotyczące różnić indywidualnych i ich uwarunkowań.  Twoim zadaniem będzie wypełnienie trzech kwestionariuszy, a następnie wzięcie udziału w rozgrywce. Całość zajmie około 15 – 25 minut.</p>
+                <p>Udział w badaniu jest dobrowolny i na każdym etapie można się z niego wycofać, bez ponoszenia jakichkolwiek konsekwencji. Zebrane przez nas dane mają charakter anonimowy. Wyniki zbiorcze będą wykorzystane jedynie w celach naukowych.</p>
+                <p>Czy wyrażasz zgodę na przystąpienie do badania?</p>
+            </div>
             <div className={styles["terms"]}>
                 <input
                     id="terms"
